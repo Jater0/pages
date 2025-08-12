@@ -1,44 +1,88 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Cloudflare Workers Playground</title>
-		<link
-			rel="stylesheet"
-			href="https://playground.devprod.cloudflare.dev/welcome-style.css"
-		/>
-	</head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open in App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background: #f5f5f5;
+      color: #333;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .btn-ios {
+      background-color: #0070c9;
+    }
+    .btn-ios:hover {
+      background-color: #005fa3;
+    }
+    .btn-android {
+      background-color: #3ddc84;
+    }
+    .btn-android:hover {
+      background-color: #2bb56b;
+    }
+    .btn-amazon {
+      background-color: #ff9900;
+    }
+    .btn-amazon:hover {
+      background-color: #e68a00;
+    }
+  </style>
+</head>
+<body>
 
-	<body>
+  <h1>Open SVS 17U</h1>
+  <p>If the app is not installed, choose your store below:</p>
 
-	</body>
+  <div class="btn-container">
+    <a href="https://apps.apple.com/app/id1148462104" class="btn btn-ios">Download on the App Store</a>
+    <a href="https://play.google.com/store/apps/details?id=com.svsound.svs" class="btn btn-android">Get it on Google Play</a>
+    <a href="https://www.amazon.com/gp/mas/dl/android?p=com.svsound.svs" class="btn btn-amazon">Get it from Amazon Appstore</a>
+  </div>
 
-	<script>
-	function redirectToApp() {
-	const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-	const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-	const isAndroid = /Android/.test(userAgent);
+  <script>
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const appLink = "svsuat://open"; // Your custom scheme or universal link
 
-	const appScheme = 'svsqa://open';
-	const appStoreUrl = 'https://apps.apple.com/app/id1148462104';
-	const googlePlayUrl = 'https://play.google.com/store/apps/details?id=com.svsound.app';
+    function openApp() {
+      const now = Date.now();
+      window.location = appLink;
+      setTimeout(function() {
+        if (Date.now() - now < 2000) {
+          console.log("App not installed, showing store options.");
+        }
+      }, 1500);
+    }
 
-	window.location.href = appScheme;
+    openApp();
+  </script>
 
-	setTimeout(() => {
-		if (isIOS) {
-		window.location.href = appStoreUrl;
-		} else if (isAndroid) {
-		window.location.href = googlePlayUrl;
-		} else {
-		window.location.href = 'https://www.svsound.com/';
-		}
-	}, 1000);
-	}
-
-	// 页面加载时执行跳转
-	window.onload = redirectToApp;
-	</script>
+</body>
 </html>
