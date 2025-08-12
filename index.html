@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Open SVS App</title>
+    <title>Open in App</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -78,29 +78,11 @@
 
     <script>
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-      const iosScheme = "svsuat://open"; // Your custom scheme or universal link
-			const androidIntent = "intent://open#Intent;scheme=svsuat;package=com.svsound.svs.ota;end";
-
-      function isAndroid() {
-        return /android/i.test(navigator.userAgent);
-      }
-
-      function isIOS() {
-        return /iphone|ipad|ipod/i.test(navigator.userAgent);
-      }
+      const appLink = "svsuat://open"; // Your custom scheme
 
       function openApp() {
         const now = Date.now();
-				if (isIOS()) {
-					// For iOS, use the custom scheme or universal link
-					window.location = iosScheme;
-				} else if (isAndroid()) {
-					// For Android, use the intent URL
-					window.location = iosScheme;
-				} else {
-					console.log("Unsupported platform");
-					return;
-				}
+        window.location = appLink;
         setTimeout(function () {
           if (Date.now() - now < 2000) {
             console.log("App not installed, showing store options.");
