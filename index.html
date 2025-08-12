@@ -1,1 +1,44 @@
-Hello World
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Cloudflare Workers Playground</title>
+		<link
+			rel="stylesheet"
+			href="https://playground.devprod.cloudflare.dev/welcome-style.css"
+		/>
+	</head>
+
+	<body>
+
+	</body>
+
+	<script>
+	function redirectToApp() {
+	const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+	const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+	const isAndroid = /Android/.test(userAgent);
+
+	const appScheme = 'svsqa://open';
+	const appStoreUrl = 'https://apps.apple.com/app/id1148462104';
+	const googlePlayUrl = 'https://play.google.com/store/apps/details?id=com.svsound.app';
+
+	window.location.href = appScheme;
+
+	setTimeout(() => {
+		if (isIOS) {
+		window.location.href = appStoreUrl;
+		} else if (isAndroid) {
+		window.location.href = googlePlayUrl;
+		} else {
+		window.location.href = 'https://www.svsound.com/';
+		}
+	}, 1000);
+	}
+
+	// 页面加载时执行跳转
+	window.onload = redirectToApp;
+	</script>
+</html>
